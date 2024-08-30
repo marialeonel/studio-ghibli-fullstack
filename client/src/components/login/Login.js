@@ -34,6 +34,7 @@ function Login() {
       <div className='container-center-align'> 
         <div className='intern-style'>
           {error && <p style={{ color: 'red' }}>{error}</p>}
+          <h2 className='text-center' style={{color: 'white'}}>Login</h2>
           <InputGroup className="mb-3">
             <Form.Control
               placeholder="Email"
@@ -51,7 +52,9 @@ function Login() {
             />
           </InputGroup>
 
-          <Button onClick={handleLogin} variant="primary">Login</Button>
+          <div className='d-flex justify-content-center'>
+            <Button onClick={handleLogin} variant="outline-light"  className="w-75">LOGIN</Button>
+          </div>
         </div>
       </div>
     </div>

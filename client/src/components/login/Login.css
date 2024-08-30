@@ -17,6 +17,7 @@ body {
     background-repeat: no-repeat;
     filter: blur(8px);
     z-index: -1; 
+    background-color: #23A3D2;
 }
 
 .container-center-align {
@@ -33,6 +34,7 @@ body {
     border: 2px solid rgb(255, 255, 255);
     padding: 20px;
     border-radius: 8px;
+    /* background-color: white; */
 
 }
 
