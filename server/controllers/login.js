@@ -5,52 +5,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/User.js')
-const {checkToken} = require('../middleware/authentication.js')
 
-//register user
-router.post('/register', async (req, res) => {
-    const {name, email, password, confirm_password } = req.body
-
-    if(!name) {
-        return res.status(422).json({ msg: 'Name is required!'})
-    }
-
-    if(!email) {
-        return res.status(422).json({ msg: 'email is required!'})
-    }
-    if(!password) {
-        return res.status(422).json({ msg: 'password is required!'})
-    }
-    if(password !== confirm_password) {
-        return res.status(422).json({ msg: 'passwords are not equal!'})
-    }
-
-    const user_exists = await User.findOne({email: email})
-
-    if(user_exists) {
-        return res.status(422).json({msg: 'Please, use another email!'})
-    }
-
-    const salt = await bcrypt.genSalt(12)
-    const password_hash = await bcrypt.hash(password, salt)
-
-    const user = new User({
-        name, 
-        email,
-        password: password_hash,
-    })
-
-    try {
-        await user.save()
-        res.status(201).json({msg: 'User succesfully created!'})
-    } catch(error) {
-        console.log(error)
-
-        res.status(500).json({
-            msg: 'An unexpected error happened in the server, try again later!',
-        })
-    }
-})
 
 //login
 router.post("/login", async (req, res) => {
