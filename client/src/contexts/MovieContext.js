@@ -1,10 +1,12 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import authApi from '../services/authApi';
+import { AuthContext } from './AuthContext';
 
 export const MovieContext = createContext();
 
 export const MovieProvider = ({ children }) => {
+    const { isAuthenticated } = useContext(AuthContext); 
     const [movies, setMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
 
@@ -19,8 +21,10 @@ export const MovieProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        fetchMovies();
-    }, []);
+        if (isAuthenticated) {
+            fetchMovies(); 
+        }
+    }, [isAuthenticated]);
 
     const filterMovies = async (title) => {
         try {
