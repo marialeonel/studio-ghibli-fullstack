@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // Tenta carregar o estado de autenticação ao iniciar
         const token = localStorage.getItem('accessToken');
         if (token) {
             setIsAuthenticated(true);
@@ -27,6 +26,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem('accessToken');
         localStorage.removeItem('user');
+        window.location.href = '/';
     };
 
     return (

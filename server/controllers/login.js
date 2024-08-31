@@ -95,29 +95,4 @@ router.post("/login", async (req, res) => {
     }
 })
 
-router.post("/logout", checkToken, async (req, res) => {
-    try {
-        // Simplesmente remova o token do lado do cliente no logout
-        res.status(200).json({ msg: "Logout successful!" });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ msg: "An unexpected error happened in the server, try again later!" });
-    }
-});
-
-
-
-//private route
-router.get("/user/:id", checkToken, async (req, res) => {
-    const id = req.params.id
-
-    const user = await User.findById(id, '-password')
-
-    if(!user) {
-        return res.status(404).json({msg: 'User not found!'})
-    }
-
-    res.status(200).json({user})
-})
-
 module.exports = router;

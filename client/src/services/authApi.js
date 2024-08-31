@@ -2,8 +2,7 @@
 import axios from 'axios';
 
 const authApi = axios.create({
-    baseURL: 'http://localhost:3001/',
-    // Outras configurações específicas para autenticação
+    baseURL: 'https://localhost:3001/',
 });
 
 authApi.interceptors.request.use(config => {
@@ -17,13 +16,22 @@ authApi.interceptors.request.use(config => {
 authApi.interceptors.response.use(
     response => response,
     error => {
-        if (error.response.status === 401) {
-            console.log('Token expired or invalid.');
-            window.location.href = '/auth/login';
+        if (error.response.status === 400 || error.response.status === 401) {
+            if (!localStorage.getItem('redirected')) {
+                console.log('Token expired or invalid.');
+                localStorage.setItem('redirected', 'true');
+                localStorage.removeItem('accessToken'); 
+                localStorage.removeItem('user'); 
+                window.location.href = '/';
+            }
         }
-
         return Promise.reject(error);
     }
 );
+
+window.addEventListener('load', () => {
+    localStorage.removeItem('redirected');
+});
+
 
 export default authApi;

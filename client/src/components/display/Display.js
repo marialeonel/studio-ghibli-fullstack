@@ -12,11 +12,11 @@ import ImageRender from '../image-render/ImageRender.js';
 const Cards = React.lazy(() => delayForDemo(import('../card/Cards.js')));
 
 function Display() {
-    const { filteredMovies, modal, setModal } = useContext(MovieContext);
+    const { filteredMovies } = useContext(MovieContext);
     const navigate = useNavigate();
 
     const handleNavigate = () => {
-        navigate('/register'); // Altere para o caminho da rota desejada
+        navigate('/register'); 
       };
 
     return (
@@ -29,11 +29,10 @@ function Display() {
                 </div>
             }>
                 <div className="d-flex justify-content-end">
-                    <Button variant="success" onClick={handleNavigate}>+ New</Button>{' '}
+                    <Button variant="success" onClick={handleNavigate}>+ New</Button>
                 </div>
                 <Cards movies={filteredMovies} />
             </Suspense>
-            {/* <Modal show={modal} onHide={() => setModal(false)} /> */}
         </Container>
         
     );
@@ -45,8 +44,5 @@ function delayForDemo(promise) {
     }).then(() => promise);
 }
 
-function redirectRegister(){
-
-}
 
 export default Display;
