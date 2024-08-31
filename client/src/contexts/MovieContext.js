@@ -8,18 +8,17 @@ export const MovieProvider = ({ children }) => {
     const [movies, setMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
 
-    useEffect(() => {
-        const fetchMovies = async () => {
-            try {
-                const response = await authApi.get('/movie/list');
-                console.log(response)
-                setMovies(response.data);
-                setFilteredMovies(response.data); 
-            } catch (error) {
-                console.error("Error fetching movies:", error);
-            }
-        };
+    const fetchMovies = async () => {
+        try {
+            const response = await authApi.get('/movie/list');
+            setMovies(response.data);
+            setFilteredMovies(response.data); 
+        } catch (error) {
+            console.error("Error fetching movies:", error);
+        }
+    };
 
+    useEffect(() => {
         fetchMovies();
     }, []);
 
@@ -49,7 +48,7 @@ export const MovieProvider = ({ children }) => {
     };
 
     return (
-        <MovieContext.Provider value={{ filteredMovies, filterMovies, registerMovie }}>
+        <MovieContext.Provider value={{ filteredMovies, filterMovies, registerMovie, fetchMovies }}>
             {children}
         </MovieContext.Provider>
     );
