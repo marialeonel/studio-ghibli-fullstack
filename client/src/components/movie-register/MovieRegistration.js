@@ -16,7 +16,6 @@ function MovieRegistration() {
     const [title, setTitle] = useState('');
     const [linkImage, setLinkImage] = useState('');
     const [description, setDescription] = useState('');
-    //const [year, setYear] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -63,6 +62,7 @@ function MovieRegistration() {
                         aria-describedby="basic-addon1"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
+                        required
                         />
                     </InputGroup>
 
@@ -79,6 +79,7 @@ function MovieRegistration() {
                         aria-describedby="basic-addon3" 
                         value={linkImage}
                         onChange={(e) => setLinkImage(e.target.value)}
+                        required
                         />
                     </InputGroup>
                     
@@ -89,6 +90,7 @@ function MovieRegistration() {
                         style={{ height: '100px' }}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                        required
                         />
                     </FloatingLabel>
 
