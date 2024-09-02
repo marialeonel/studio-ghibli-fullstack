@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
         res.status(200).json({msg: 'Authentication successfully completed!', token: token})
     } catch(error) {
         console.log(error)
-        logger.error(`Falha de login para o usuário ${user} do IP ${req.ip}`);
+        //logger.error(`Falha de login para o usuário ${user} do IP ${req.ip}`);
         res.status(500).json({
             msg: 'An unexpected error happened in the server, try again later!',
         })

@@ -14,8 +14,6 @@ function Header() {
       <Container>
           <Navbar.Brand href="#">Studio Ghibli</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Register</Nav.Link>
           </Nav>
             <Col xs="auto">
             <Button variant="outline-light" onClick={logout}>LOGOUT</Button>
