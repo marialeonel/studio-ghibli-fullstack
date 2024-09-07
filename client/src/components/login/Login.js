@@ -17,7 +17,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await authApi.post('/auth/login', { email, password });
+      const response = await authApi.post('/authentication/login', { email, password });
       const { token, refreshToken } = response.data;
 
       login({ email }, { accessToken: token, refreshToken });

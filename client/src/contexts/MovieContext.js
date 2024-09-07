@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import authApi from '../services/authApi';
 import { AuthContext } from './AuthContext';
 
@@ -12,7 +11,7 @@ export const MovieProvider = ({ children }) => {
 
     const fetchMovies = async () => {
         try {
-            const response = await authApi.get('/movie/list');
+            const response = await authApi.get('/movie/movies');
             setMovies(response.data);
             setFilteredMovies(response.data); 
         } catch (error) {
@@ -28,8 +27,8 @@ export const MovieProvider = ({ children }) => {
 
     const filterMovies = async (title) => {
         try {
-            const response = await authApi.get('/movie/search', {
-                params: { title}
+            const response = await authApi.get('/movie/movies', {
+                params: { title }
             });
             setFilteredMovies(response.data);
         } catch (error) {
@@ -39,7 +38,7 @@ export const MovieProvider = ({ children }) => {
 
     const registerMovie = async (movieData) => {
         try {
-            const response = await authApi.post('/movie/register', movieData);
+            const response = await authApi.post('/movie/new-movie', movieData);
             if (response.status === 201) {
                 setMovies([...movies, response.data]);
                 setFilteredMovies([...filteredMovies, response.data]);
@@ -57,3 +56,4 @@ export const MovieProvider = ({ children }) => {
         </MovieContext.Provider>
     );
 };
+

@@ -45,7 +45,7 @@ function MovieRegistration() {
     };
 
     return (
-        <div>
+        <div style={{ height: '100vh', overflowY: 'auto' }}>
             <Header></Header>
             <ImageRender></ImageRender>
             <Container className="container-register">
@@ -58,11 +58,11 @@ function MovieRegistration() {
                             </svg>
                         </InputGroup.Text>
                         <Form.Control
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
                         />
                     </InputGroup>
 
@@ -75,11 +75,11 @@ function MovieRegistration() {
                             </svg>
                         </InputGroup.Text>
                         <Form.Control 
-                        id="basic-url" 
-                        aria-describedby="basic-addon3" 
-                        value={linkImage}
-                        onChange={(e) => setLinkImage(e.target.value)}
-                        required
+                            id="basic-url" 
+                            aria-describedby="basic-addon3" 
+                            value={linkImage}
+                            onChange={(e) => setLinkImage(e.target.value)}
+                            required
                         />
                     </InputGroup>
                     

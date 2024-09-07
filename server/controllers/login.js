@@ -3,12 +3,10 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const {logger} = require('../services/logger.js');
+const logger = require('../services/logger.js');
 
 const User = require('../models/User.js')
 
-
-//login
 router.post("/login", async (req, res) => {
     const {email, password } = req.body
 
@@ -20,6 +18,7 @@ router.post("/login", async (req, res) => {
     }
 
     const user = await User.findOne({email: email})
+    logger.info(`User ${user} logged in.`);
 
     if(!user) {
         return res.status(404).json({msg: 'User not found!'})
@@ -44,8 +43,7 @@ router.post("/login", async (req, res) => {
 
         res.status(200).json({msg: 'Authentication successfully completed!', token: token})
     } catch(error) {
-        console.log(error)
-        //logger.error(`Falha de login para o usuário ${user} do IP ${req.ip}`);
+        logger.error(`Login failed for user ${user} from IP ${req.ip}`);
         res.status(500).json({
             msg: 'An unexpected error happened in the server, try again later!',
         })

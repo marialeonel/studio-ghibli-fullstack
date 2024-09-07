@@ -3,11 +3,9 @@ import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import { MovieContext } from '../../contexts/MovieContext.js';
 import Input from '../input/Input.js';
-//import Modal from '../modal/Modal.js';
 import './Display.css';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/esm/Button.js';
-import ImageRender from '../image-render/ImageRender.js';
 
 const Cards = React.lazy(() => delayForDemo(import('../card/Cards.js')));
 
@@ -20,7 +18,6 @@ function Display() {
       };
 
     return (
-            
             <Container className="container-display">
             <Input />
             <Suspense fallback={

@@ -1,12 +1,20 @@
-const winston = require('winston');
+// logger.js
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, label, printf } = format;
 
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  transports: [
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
-  ],
+const myFormat = printf(({ level, message, label, timestamp }) => {
+    return `${timestamp} [${label}] ${level}: ${message}`;
 });
 
-module.exports = logger;
+const logger = createLogger({
+    format: combine(
+        label({ label: 'business-rules' }),
+        timestamp(),
+        myFormat
+    ),
+    transports: [
+        new transports.Console()
+    ]
+});
+
+module.exports = logger; 
